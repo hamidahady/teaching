@@ -11,10 +11,10 @@ class RatingsBreakdown(MRJob):
 
     def mapper_get_ratings(self, _, line):
         (userID, movieID, rating, timestamp) = line.split('\t')
-        yield movieID, 1
+        yield movieID, 1,rating
 
-    def reducer_count_ratings(self, key, values):
-        yield str(sum(values)).zfill(5), key
+    def reducer_count_ratings(self, key, value1, value2):
+        yield str(sum(value1)/value2).zfill(5), key
 
     def reducer_sorted_output(self, count, movies):
         for movie in movies:
