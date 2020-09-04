@@ -11,7 +11,7 @@ class toprated(MRJob):
 
     def mapper_rating(self, _, line):
         (userid, movieid, rating, timestamp) = line.split('\t')
-        yield userid, rating
+        yield userid, int(rating)
 
     def reducer_rating(self, key, values):
         yield str(sum(values)).zfill(5), key
