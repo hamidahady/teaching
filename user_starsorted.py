@@ -16,7 +16,7 @@ class toprated(MRJob):
     def reducer_rating(self, key, values):
         yield str(sum(values)).zfill(5), key
 
-    def reducer_sorted(self, count, userid):
+    def reducer_sorted(self, count, users):
         for user in users:
             yield user, count
 
